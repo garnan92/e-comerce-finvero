@@ -8,10 +8,6 @@ export const PRODUCT_URI = "/product";
 
 export const CATEGORY_URI = "/category";
 
-//category
+export const CART_URI = "/cart";
 
-//card
-
-//bank
-
-//reciept
+export const RECIEPT_URI = "/reciept";

@@ -1,13 +1,16 @@
-import { Request, Response, NextFunction } from "express";
 import User from "interfaces/models/user";
 import mongoose from "mongoose";
 
-export const createUser = (
-  req: Request,
-  res: Response,
-  _next: NextFunction
-) => {
-  let { name, mail, password, typo } = req.body;
+export const selectAll = async () => {
+  return await User.find().exec();
+};
+
+export const select = async (id: String) => {
+  return await User.findById({ _id: id }).exec();
+};
+
+export const insert = async (body: any) => {
+  let { name, mail, password, typo } = body;
 
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
@@ -17,32 +20,13 @@ export const createUser = (
     typo,
   });
 
-  return user
-    .save()
-    .then((result) => {
-      return res.status(201).json({
-        user: result,
-      });
-    })
-    .catch((error) => {
-      return res.status(500).json({
-        error,
-      });
-    });
+  return await user.save();
 };
 
-export const editUser = (req: Request, res: Response, _next: NextFunction) => {
-  let { id } = req.params;
+export const update = async (id: String, body: object) => {
+  return await User.findByIdAndUpdate({ _id: id }, body);
+};
 
-  User.findByIdAndUpdate({ _id: id }, req.body)
-    .then((_result) => {
-      return res.status(200).json({
-        message: "updated",
-      });
-    })
-    .catch((error) => {
-      return res.status(500).json({
-        error,
-      });
-    });
+export const deleted = async (id: String) => {
+  return await User.findByIdAndDelete({ _id: id });
 };

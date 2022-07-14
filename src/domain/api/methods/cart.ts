@@ -1,19 +1,19 @@
 import { Request, Response, NextFunction } from "express";
-import * as Category from "interfaces/http/handlers/database/queries/category";
+import * as Cart from "interfaces/http/handlers/database/queries/cart";
 
-export const getAllCategories = async (
+export const getAllCarts = async (
   _req: Request,
   res: Response,
   _next: NextFunction
 ) => {
-  const categories = await Category.selectAll();
+  const categories = await Cart.selectAll();
 
   return res.status(200).json({
     categories,
   });
 };
 
-export const getCategory = async (
+export const getCart = async (
   req: Request,
   res: Response,
   _next: NextFunction

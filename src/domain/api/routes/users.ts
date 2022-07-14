@@ -1,12 +1,16 @@
 import express from "express";
-import {
-  createUser,
-  editUser,
-} from "interfaces/http/handlers/database/queries/user";
+import * as User from "../methods/user";
 
 const router = express.Router();
 
-router.post("/", createUser);
-router.put("/:id", editUser);
+router.get("/all", User.getUsers);
+
+router.get("/:id", User.getUser);
+
+router.post("/", User.createUser);
+
+router.put("/:id", User.editUser);
+
+router.delete("/:id", User.deleteUser);
 
 export default router;

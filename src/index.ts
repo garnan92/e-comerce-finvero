@@ -1,9 +1,10 @@
 import express from "express";
 import { PORT } from "infra/constants";
-import { CATEGORY_URI, USER_URI } from "domain/api/constants";
+import { CATEGORY_URI, PRODUCT_URI, USER_URI } from "domain/api/constants";
 import { connectDB } from "interfaces/http/handlers/database/conection";
 import userRoutes from "domain/api/routes/users";
 import categoryRoutes from "domain/api/routes/category";
+import productRoutes from "domain/api/routes/product";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 
 app.use(USER_URI, userRoutes);
 app.use(CATEGORY_URI, categoryRoutes);
+app.use(PRODUCT_URI, productRoutes);
 
 app.listen(PORT, () => {
   console.log(`port listening ${PORT}`);
